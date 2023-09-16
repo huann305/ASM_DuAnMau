@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_quan_ly_phieu_muon">
+
+    <fragment
+        android:id="@+id/nav_quan_ly_phieu_muon"
+        android:name="com.example.asm_duanmau.ui.quanlyphieumuon.QuanLyPhieuMuonFragment"
+        android:label="Quản lý phiếu mượn"
+        tools:layout="@layout/fragment_quan_ly_phieu_muon" />
+
+    <fragment
+        android:id="@+id/nav_quan_ly_loai_sach"
+        android:name="com.example.asm_duanmau.ui.quanlyloaisach.QuanLyLoaiSachFragment"
+        android:label="Quản lý loại sách"
+        tools:layout="@layout/fragment_quan_ly_loai_sach" />
+
+    <fragment
+        android:id="@+id/nav_quan_ly_sach"
+        android:name="com.example.asm_duanmau.ui.quanlysach.QuanLySachFragment"
+        android:label="Quản lý sách"
+        tools:layout="@layout/fragment_quan_ly_sach" />
+    <fragment
+        android:id="@+id/nav_quan_ly_thanh_vien"
+        android:name="com.example.asm_duanmau.ui.quanlythanhvien.QuanLyThanhVienFragment"
+        android:label="Quản lý thành viên"
+        tools:layout="@layout/fragment_quan_ly_thanh_vien" />
+    <fragment
+        android:id="@+id/nav_top_10"
+        android:name="com.example.asm_duanmau.ui.top10.Top10Fragment"
+        android:label="Top 10 sách mượn nhiều nhất"
+        tools:layout="@layout/fragment_top10" />
+    <fragment
+        android:id="@+id/nav_doanh_thu"
+        android:name="com.example.asm_duanmau.ui.doanhthu.DoanhThuFragment"
+        android:label="Doanh thu"
+        tools:layout="@layout/fragment_doanh_thu" />
+    <fragment
+        android:id="@+id/nav_doi_mat_khau"
+        android:name="com.example.asm_duanmau.ui.doimatkhau.DoiMatKhauFragment"
+        android:label="Đổi mật khẩu"
+        tools:layout="@layout/fragment_doi_mat_khau" />
+</navigation>
