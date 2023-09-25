@@ -1,11 +1,20 @@
 package com.example.asm_duanmau;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.asm_duanmau.database.DbHelper;
+import com.example.asm_duanmau.ui.activity.DangNhap;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,15 +34,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dbHelper = new DbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+        View headerview = binding.navView.getHeaderView(0);
+        TextView tvName = headerview.findViewById(R.id.name);
+        SharedPreferences sharedPreferences = getSharedPreferences("save_acc", Context.MODE_PRIVATE);
+        tvName.setText(sharedPreferences.getString("hoTen", ""));
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_quan_ly_phieu_muon,
@@ -46,17 +57,18 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_dang_xuat)
                 .setOpenableLayout(drawer)
                 .build();
+
+        if(sharedPreferences.getString("role", "").equals("admin")){
+            binding.navView.inflateMenu(R.menu.activity_main_drawer);
+        }else{
+            binding.navView.inflateMenu(R.menu.activity_thuthu_drawer);
+        }
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -42,4 +42,9 @@
         android:name="com.example.asm_duanmau.ui.doimatkhau.DoiMatKhauFragment"
         android:label="Đổi mật khẩu"
         tools:layout="@layout/fragment_doi_mat_khau" />
+    <fragment
+        android:id="@+id/nav_dang_xuat"
+        android:name="com.example.asm_duanmau.ui.DangXuat"
+        android:label="Đổi mật khẩu"
+        tools:layout="@layout/fragment_dang_xuat" />
 </navigation>

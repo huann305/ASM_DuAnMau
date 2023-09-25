@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/t_o_t_i_kho"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#0396C6"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Thêm phiếu mượn"
+        android:gravity="center_horizontal|center_vertical"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Mã phiếu: 1"
+        android:id="@+id/tv_ma_phieu"
+        android:textColor="@color/black"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/spn_thanh_vien"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/spn_ten_sach"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Tiên thuê: 1000"
+        android:textColor="@color/black"
+        android:id="@+id/tv_tien_thue"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_huy"
+            android:textColor="@color/white"
+            android:background="#C93142"
+            android:layout_marginRight="10dp"
+            android:text="Hủy"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_tao"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
+            android:background="#0396C6"
+            android:layout_weight="1"
+            android:text="Tạo"/>
+    </LinearLayout>
+</LinearLayout>

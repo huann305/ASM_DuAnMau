@@ -1,4 +1,4 @@
-package com.example.asm_duanmau;
+package com.example.asm_duanmau.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,9 +15,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String createTableThuThu = "CREATE TABLE THUTHU (maTT TEXT PRIMARY KEY , hoTen TEXT NOT NULL, matKhau TEXT NOT NULL)";
+        String createTableThuThu = "CREATE TABLE THUTHU (maTT TEXT PRIMARY KEY , hoTen TEXT NOT NULL, matKhau TEXT NOT NULL, role TEXT NOT NULL)";
         db.execSQL(createTableThuThu);
+
+        db.execSQL("INSERT INTO THUTHU VALUES('admin', 'Vũ Bá Huấn', 'admin', 'admin')");
 
         String createTableThanhVien = "CREATE TABLE THANHVIEN (maTV INTEGER PRIMARY KEY AUTOINCREMENT, hoTen TEXT NOT NULL, namSinh TEXT NOT NULL)";
         db.execSQL(createTableThanhVien);

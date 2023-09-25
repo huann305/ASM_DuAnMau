@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/t_o_t_i_kho"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#0396C6"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Thêm loại sách"
+        android:gravity="center_horizontal|center_vertical"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên loại">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_ten_loai_sach"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_huy"
+            android:textColor="@color/white"
+            android:background="#C93142"
+            android:layout_marginRight="10dp"
+            android:text="Hủy"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_tao"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
+            android:background="#0396C6"
+            android:layout_weight="1"
+            android:text="Tạo"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quanlyphieumuon.QuanLyPhieuMuonFragment">
+    tools:context=".ui.quanlyloaisach.QuanLyLoaiSachFragment">
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rcv"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/baseline_add_24"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:outlineProvider="background"
+        android:outlineSpotShadowColor="@color/blue"
+        android:outlineAmbientShadowColor="@color/blue"
+        app:borderWidth="0dp"
+        android:layout_margin="10dp"
+        android:id="@+id/btn_add"/>
+
+</RelativeLayout>

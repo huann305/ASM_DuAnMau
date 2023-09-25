@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quanlythanhvien.QuanLyThanhVienFragment">
+    tools:context=".ui.quanlyloaisach.QuanLyLoaiSachFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/rcv"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/baseline_add_24"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:outlineProvider="background"
+        android:outlineSpotShadowColor="@color/blue"
+        android:outlineAmbientShadowColor="@color/blue"
+        app:borderWidth="0dp"
+        android:layout_margin="10dp"
+        android:id="@+id/btn_add"/>
 
-</FrameLayout>
+</RelativeLayout>
