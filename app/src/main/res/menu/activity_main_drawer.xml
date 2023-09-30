@@ -40,6 +40,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_them_thu_thu"
+                    android:icon="@drawable/baseline_add_24"
+                    android:title="Tạo tài khoản thủ thư" />
+                <item
                     android:id="@+id/nav_doi_mat_khau"
                     android:icon="@drawable/baseline_key_24"
                     android:title="Đổi mật khẩu" />

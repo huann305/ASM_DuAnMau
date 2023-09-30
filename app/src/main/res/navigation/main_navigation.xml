@@ -16,6 +16,11 @@
         android:name="com.example.asm_duanmau.ui.quanlyloaisach.QuanLyLoaiSachFragment"
         android:label="Quản lý loại sách"
         tools:layout="@layout/fragment_quan_ly_loai_sach" />
+    <fragment
+        android:id="@+id/nav_them_thu_thu"
+        android:name="com.example.asm_duanmau.ui.TaoThuThu"
+        android:label="Thêm thủ thư"
+        tools:layout="@layout/dialog_them_thu_thu" />
 
     <fragment
         android:id="@+id/nav_quan_ly_sach"

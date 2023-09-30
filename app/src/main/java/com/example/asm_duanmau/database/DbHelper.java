@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO THUTHU VALUES('admin', 'Vũ Bá Huấn', 'admin', 'admin')");
 
-        String createTableThanhVien = "CREATE TABLE THANHVIEN (maTV INTEGER PRIMARY KEY AUTOINCREMENT, hoTen TEXT NOT NULL, namSinh TEXT NOT NULL)";
+        String createTableThanhVien = "CREATE TABLE THANHVIEN (maTV INTEGER PRIMARY KEY AUTOINCREMENT, hoTen TEXT NOT NULL, namSinh INTEGER NOT NULL)";
         db.execSQL(createTableThanhVien);
 
         String createTableLoaiSach = "CREATE TABLE LOAISACH (maLoai INTEGER PRIMARY KEY AUTOINCREMENT, tenLoai TEXT NOT NULL)";

@@ -6,31 +6,32 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.asm_duanmau.database.DbHelper;
-import com.example.asm_duanmau.model.ThuThu;
+import com.example.asm_duanmau.model.LoaiSach;
+import com.example.asm_duanmau.model.Sach;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAO {
+public class SachDAO {
     private DbHelper dbHelper;
 
-    public DAO(Context context) {
+    public SachDAO(Context context) {
         dbHelper = new DbHelper(context);
     }
 
-    public List<ThuThu> getListThuThu(){
-        List<ThuThu> list = new ArrayList<>();
+    public List<Sach> getAllList(){
+        List<Sach> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.beginTransaction();
 
         try {
-            Cursor cursor = db.rawQuery("SELECT * FROM THUTHU", null);
+            Cursor cursor = db.rawQuery("SELECT * FROM SACH", null);
 
             if (cursor.getCount() > 0) {
                 cursor.moveToFirst();
 
                 do {
-                    list.add(new ThuThu(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+                    list.add(new Sach(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3)));
                 } while (cursor.moveToNext());
                 db.setTransactionSuccessful();
             }
@@ -45,43 +46,44 @@ public class DAO {
     }
 
 
-    public boolean updateThuThu(ThuThu thuThu, String id){
+    public boolean update(Sach obj, String id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.beginTransaction();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("matKhau", thuThu.getMatKhau());
+        contentValues.put("tenSach", obj.getTenSach());
+        contentValues.put("giaThue", obj.getGiaThue());
+        contentValues.put("maLoai", obj.getMaLoai());
 
         database.setTransactionSuccessful();
         database.endTransaction();
 
-        long check = database.update("THUTHU", contentValues, "maTT = ?", new String[]{String.valueOf(id)});
+        long check = database.update("SACH", contentValues, "maSach = ?", new String[]{String.valueOf(id)});
         return check != -1;
     }
 
-    public boolean addThuThu(ThuThu thu){
+    public boolean add(Sach obj){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.beginTransaction();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("maTT", thu.getMaTT());
-        contentValues.put("hoTen", thu.getHoTen());
-        contentValues.put("matKhau", "huann305");
-        contentValues.put("role", "thuthu");
+        contentValues.put("tenSach", obj.getTenSach());
+        contentValues.put("giaThue", obj.getGiaThue());
+        contentValues.put("maLoai", obj.getMaLoai());
 
         database.setTransactionSuccessful();
         database.endTransaction();
 
-        long check = database.insert("THUTHU", null, contentValues);
+        long check = database.insert("SACH", null, contentValues);
         return check != -1;
     }
-    public boolean deleteThuThu(int id){
+    public boolean delete(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        List<ThuThu> list = getListThuThu();
+        List<Sach> list = getAllList();
 
-        long check = database.delete("THUTHU", "maTT=?", new String[]{String.valueOf(list.get(id).getMaTT())});
+        long check = database.delete("SACH", "maSach=?", new String[]{String.valueOf(list.get(id).getMaSach())});
         return check!=-1;
     }
 }

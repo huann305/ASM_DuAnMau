@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.asm_duanmau.dao.DAO;
+import com.example.asm_duanmau.dao.ThuThuDAO;
 import com.example.asm_duanmau.databinding.FragmentDoiMatKhauBinding;
 import com.example.asm_duanmau.model.ThuThu;
 import com.example.asm_duanmau.ui.activity.DangNhap;
@@ -55,8 +55,8 @@ public class DoiMatKhauFragment extends Fragment {
 
                 if(oldPass.equals(sharedPreferences.getString("pass", ""))){
                     if(newPass.equals(confirm)){
-                        DAO dao = new DAO(getContext());
-                        dao.updateThuThu(new ThuThu("", "", newPass, ""), sharedPreferences.getString("username", ""));
+                        ThuThuDAO thuThuDao = new ThuThuDAO(getContext());
+                        thuThuDao.updateThuThu(new ThuThu("", "", newPass, ""), sharedPreferences.getString("username", ""));
                         Toast.makeText(getContext(), "Đổi mật khẩu thành công, đăng nhập lại để tiếp tục", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(getContext(), DangNhap.class));

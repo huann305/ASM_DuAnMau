@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asm_duanmau.R;
-import com.example.asm_duanmau.dao.DAO;
+import com.example.asm_duanmau.dao.ThuThuDAO;
 import com.example.asm_duanmau.model.ThuThu;
 
 import java.util.List;
@@ -41,8 +41,8 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DAO dao = new DAO(context);
-                dao.deleteThuThu(holder.getAdapterPosition());
+                ThuThuDAO thuThuDao = new ThuThuDAO(context);
+                thuThuDao.deleteThuThu(holder.getAdapterPosition());
                 list.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
             }

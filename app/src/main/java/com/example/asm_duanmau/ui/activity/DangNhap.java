@@ -6,13 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.asm_duanmau.MainActivity;
-import com.example.asm_duanmau.R;
-import com.example.asm_duanmau.dao.DAO;
+import com.example.asm_duanmau.dao.ThuThuDAO;
 import com.example.asm_duanmau.databinding.ActivityDangNhapBinding;
 import com.example.asm_duanmau.model.ThuThu;
 
@@ -28,8 +26,8 @@ public class DangNhap extends AppCompatActivity {
         binding = ActivityDangNhapBinding.inflate(getLayoutInflater());
         sharedPreferences = getSharedPreferences("save_acc", Context.MODE_PRIVATE);
 
-        DAO dao = new DAO(this);
-        List<ThuThu> list = dao.getListThuThu();
+        ThuThuDAO thuThuDao = new ThuThuDAO(this);
+        List<ThuThu> list = thuThuDao.getListThuThu();
 
 
         if (sharedPreferences.getBoolean("savePass", false)) {

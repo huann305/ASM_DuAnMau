@@ -13,13 +13,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asm_duanmau.R;
 import com.example.asm_duanmau.adapter.ThanhVienAdapter;
-import com.example.asm_duanmau.dao.DAO;
-import com.example.asm_duanmau.databinding.FragmentDoiMatKhauBinding;
+import com.example.asm_duanmau.dao.ThuThuDAO;
 import com.example.asm_duanmau.databinding.FragmentQuanLyThanhVienBinding;
 import com.example.asm_duanmau.model.ThuThu;
 
@@ -35,8 +33,8 @@ public class QuanLyThanhVienFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentQuanLyThanhVienBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        DAO dao = new DAO(getContext());
-        list = dao.getListThuThu();
+        ThuThuDAO thuThuDao = new ThuThuDAO(getContext());
+        list = thuThuDao.getListThuThu();
 
         list.remove(0);
 
@@ -59,12 +57,12 @@ public class QuanLyThanhVienFragment extends Fragment {
                 btnTao.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DAO dao = new DAO(getContext());
-                        if(!dao.addThuThu(new ThuThu(edtUsername.getText().toString(), edtHoTen.getText().toString()))){
+                        ThuThuDAO thuThuDao = new ThuThuDAO(getContext());
+                        if(!thuThuDao.addThuThu(new ThuThu(edtUsername.getText().toString(), edtHoTen.getText().toString()))){
                             Toast.makeText(getContext(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        list = dao.getListThuThu();
+                        list = thuThuDao.getListThuThu();
                         list.remove(0);
 
                         thanhVienAdapter = new ThanhVienAdapter(list, getContext());

@@ -54,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_top_10,
                 R.id.nav_doanh_thu,
                 R.id.nav_doi_mat_khau,
+                R.id.nav_them_thu_thu,
                 R.id.nav_dang_xuat)
                 .setOpenableLayout(drawer)
                 .build();
 
-        if(sharedPreferences.getString("role", "").equals("admin")){
-            binding.navView.inflateMenu(R.menu.activity_main_drawer);
-        }else{
-            binding.navView.inflateMenu(R.menu.activity_thuthu_drawer);
+        binding.navView.inflateMenu(R.menu.activity_main_drawer);
+        if(!sharedPreferences.getString("role", "").equals("admin")){
+            binding.navView.getMenu().findItem(R.id.nav_them_thu_thu).setVisible(false);
         }
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
