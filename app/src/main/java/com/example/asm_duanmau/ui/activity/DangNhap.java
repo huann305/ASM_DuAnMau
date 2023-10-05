@@ -26,9 +26,10 @@ public class DangNhap extends AppCompatActivity {
         binding = ActivityDangNhapBinding.inflate(getLayoutInflater());
         sharedPreferences = getSharedPreferences("save_acc", Context.MODE_PRIVATE);
 
-        ThuThuDAO thuThuDao = new ThuThuDAO(this);
-        List<ThuThu> list = thuThuDao.getListThuThu();
+        binding.edtUsername.setText("admin");
+        binding.edtPassword.setText("admin");
 
+        ThuThuDAO thuThuDao = new ThuThuDAO(this);
 
         if (sharedPreferences.getBoolean("savePass", false)) {
             binding.edtUsername.setText(sharedPreferences.getString("username", ""));
@@ -42,27 +43,19 @@ public class DangNhap extends AppCompatActivity {
                 String username = binding.edtUsername.getText().toString();
                 String pass = binding.edtPassword.getText().toString();
 
-                for (ThuThu thuThu : list) {
-                    if (username.equals(thuThu.getMaTT())) {
-                        if (pass.equals(thuThu.getMatKhau())) {
-                            login(username, pass, thuThu.getHoTen(), thuThu.getRole());
-                            Toast.makeText(DangNhap.this, thuThu.getRole(), Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                    }
+                if(thuThuDao.checkLogin(username, pass)){
+                    login(username, pass);
                 }
             }
         });
         setContentView(binding.getRoot());
     }
 
-    private void login(String username, String pass, String hoTen, String role) {
+    private void login(String username, String pass) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("username", username);
         editor.putString("pass", pass);
-        editor.putString("hoTen", hoTen);
-        editor.putString("role", role);
 
         editor.putBoolean("savePass", binding.cbIsRemember.isChecked());
 

@@ -44,11 +44,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_tao"
+            android:id="@+id/btn_them"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:background="#0396C6"
             android:layout_weight="1"
-            android:text="Tạo"/>
+            android:text="Thêm"/>
     </LinearLayout>
 </LinearLayout>

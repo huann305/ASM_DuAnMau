@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.asm_duanmau.database.DbHelper;
-import com.example.asm_duanmau.model.Sach;
+import com.example.asm_duanmau.model.PhieuMuon;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PhieuMuonDAO {
@@ -18,71 +21,75 @@ public class PhieuMuonDAO {
         dbHelper = new DbHelper(context);
     }
 
-    public List<Sach> getAllList(){
-        List<Sach> list = new ArrayList<>();
+
+    public PhieuMuon getID(String id) throws ParseException {
+        String sql = "SELECT * FROM PHIEUMUON WHERE maPM = ?";
+        List<PhieuMuon> list = getData(sql, id);
+        return list.get(0);
+    }
+    public List<PhieuMuon> getAll() throws ParseException {
+        String sql = "SELECT * FROM PHIEUMUON";
+        return getData(sql);
+    }
+
+    public boolean update(PhieuMuon obj, String id){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.beginTransaction();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("maTT", obj.getMaTT());
+        contentValues.put("maTV", obj.getMaTV());
+        contentValues.put("maSach", obj.getMaSach());
+        contentValues.put("tienThue", obj.getTienThue());
+        contentValues.put("ngay", obj.getNgay().getTime());
+        contentValues.put("traSach", obj.getTraSach());
+
+        database.setTransactionSuccessful();
+        database.endTransaction();
+
+        long check = database.update("PHIEUMUON", contentValues, "maPM = ?", new String[]{String.valueOf(id)});
+        return check != -1;
+    }
+
+    public boolean add(PhieuMuon obj){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.beginTransaction();
+
+        ContentValues contentValues = new ContentValues();
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+        contentValues.put("maTT", obj.getMaTT());
+        contentValues.put("maTV", obj.getMaTV());
+        contentValues.put("maSach", obj.getMaSach());
+        contentValues.put("tienThue", obj.getTienThue());
+        contentValues.put("ngay", sdf.format(obj.getNgay()));
+        contentValues.put("traSach", obj.getTraSach());
+
+        database.setTransactionSuccessful();
+        database.endTransaction();
+
+        long check = database.insert("PHIEUMUON", null, contentValues);
+        return check != -1;
+    }
+    public int delete(int id){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        return database.delete("PhieuMuon", "maPM= ?", new String[]{String.valueOf(id)});
+    }
+
+    private List<PhieuMuon> getData(String sql, String ...selectionArgs) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.beginTransaction();
+        List<PhieuMuon> list = new ArrayList<>();
 
-        try {
-            Cursor cursor = db.rawQuery("SELECT * FROM SACH", null);
-
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-
-                do {
-                    list.add(new Sach(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3)));
-                } while (cursor.moveToNext());
-                db.setTransactionSuccessful();
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            db.endTransaction();
+        Cursor c = db.rawQuery(sql, selectionArgs);
+        while (c.moveToNext()){
+            list.add(new PhieuMuon(c.getInt(0),c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4), dateFormat.parse(c.getString(6)), c.getInt(5)));
         }
 
         return list;
-    }
-
-
-    public boolean update(Sach obj, String id){
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        database.beginTransaction();
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put("tenSach", obj.getTenSach());
-        contentValues.put("giaThue", obj.getGiaThue());
-        contentValues.put("maLoai", obj.getMaLoai());
-
-        database.setTransactionSuccessful();
-        database.endTransaction();
-
-        long check = database.update("SACH", contentValues, "maSach = ?", new String[]{String.valueOf(id)});
-        return check != -1;
-    }
-
-    public boolean add(Sach obj){
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        database.beginTransaction();
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put("tenSach", obj.getTenSach());
-        contentValues.put("giaThue", obj.getGiaThue());
-        contentValues.put("maLoai", obj.getMaLoai());
-
-        database.setTransactionSuccessful();
-        database.endTransaction();
-
-        long check = database.insert("SACH", null, contentValues);
-        return check != -1;
-    }
-    public boolean delete(int id){
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        List<Sach> list = getAllList();
-
-        long check = database.delete("SACH", "maSach=?", new String[]{String.valueOf(list.get(id).getMaSach())});
-        return check!=-1;
     }
 }

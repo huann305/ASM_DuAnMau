@@ -30,6 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/spn_thanh_vien"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Thủ thư"
+        android:id="@+id/tv_thu_thu"
+        android:textColor="@color/black"
+        />
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -41,8 +51,24 @@
         android:gravity="center"
         android:text="Tiên thuê: 1000"
         android:textColor="@color/black"
+        android:id="@+id/tv_ngay_muon"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Tiên thuê: 1000"
+        android:textColor="@color/black"
         android:id="@+id/tv_tien_thue"
         />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đã trả sách"
+        android:id="@+id/cbDaTraSach"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,11 +87,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_tao"
+            android:id="@+id/btn_them"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:background="#0396C6"
             android:layout_weight="1"
-            android:text="Tạo"/>
+            android:text="Thêm"/>
     </LinearLayout>
 </LinearLayout>

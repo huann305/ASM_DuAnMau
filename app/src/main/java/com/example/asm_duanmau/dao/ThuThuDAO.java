@@ -2,11 +2,15 @@ package com.example.asm_duanmau.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.example.asm_duanmau.database.DbHelper;
+import com.example.asm_duanmau.model.ThanhVien;
 import com.example.asm_duanmau.model.ThuThu;
+import com.example.asm_duanmau.ui.activity.DangNhap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,9 @@ public class ThuThuDAO {
         return list;
     }
 
+    public ThuThu getThuThuById(String id){
+        return getData("SELECT * FROM THUTHU WHERE maTT = ?", id).get(0);
+    }
 
     public boolean updateThuThu(ThuThu thuThu, String id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -83,5 +90,28 @@ public class ThuThuDAO {
 
         long check = database.delete("THUTHU", "maTT=?", new String[]{String.valueOf(list.get(id).getMaTT())});
         return check!=-1;
+    }
+
+    public boolean checkLogin(String username, String password){
+        List<ThuThu> list = getListThuThu();
+        for (ThuThu thuThu : list) {
+            if (username.equals(thuThu.getMaTT())) {
+                if (password.equals(thuThu.getMatKhau())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private List<ThuThu> getData(String sql, String ...selectionArgs){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        List<ThuThu> list = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql, selectionArgs);
+        while (c.moveToNext()){
+            list.add(new ThuThu(c.getString(0), c.getString(1), c.getString(2), c.getString(3)));
+        }
+
+        return list;
     }
 }

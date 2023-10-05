@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asm_duanmau.R;
-import com.example.asm_duanmau.dao.ThuThuDAO;
-import com.example.asm_duanmau.model.ThuThu;
+import com.example.asm_duanmau.dao.ThanhVienDAO;
+import com.example.asm_duanmau.model.ThanhVien;
 
 import java.util.List;
 
 public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienViewHolder> {
 
-    List<ThuThu> list;
+    List<ThanhVien> list;
     Context context;
 
-    public ThanhVienAdapter(List<ThuThu> list, Context context) {
+    public ThanhVienAdapter(List<ThanhVien> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -35,14 +35,15 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
 
     @Override
     public void onBindViewHolder(@NonNull ThanhVienViewHolder holder, int position) {
-        ThuThu thuThu = list.get(position);
-        holder.tvUsername.setText(thuThu.getMaTT());
-        holder.tvHoTen.setText(thuThu.getHoTen());
+        ThanhVien thanhVien = list.get(position);
+        holder.tvHoten.setText(thanhVien.getHoTen());
+        holder.tvMaTV.setText(thanhVien.getMaTV() + "");
+        holder.tvNamSinh.setText(thanhVien.getNamSinh());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThuThuDAO thuThuDao = new ThuThuDAO(context);
-                thuThuDao.deleteThuThu(holder.getAdapterPosition());
+                ThanhVienDAO thanhVienDAO = new ThanhVienDAO(context);
+                thanhVienDAO.delete(list.get(holder.getLayoutPosition()).getMaTV());
                 list.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
             }
@@ -55,15 +56,17 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     }
 
     public class ThanhVienViewHolder extends RecyclerView.ViewHolder{
-        TextView tvUsername;
-        TextView tvHoTen;
+        TextView tvHoten;
+        TextView tvMaTV;
+        TextView tvNamSinh;
         ImageView btnDelete;
         ImageView btnUpdate;
 
         public ThanhVienViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUsername = itemView.findViewById(R.id.tv_username);
-            tvHoTen = itemView.findViewById(R.id.tv_ho_ten);
+            tvHoten = itemView.findViewById(R.id.tv_username);
+            tvMaTV = itemView.findViewById(R.id.tv_ma_thanh_vien);
+            tvNamSinh = itemView.findViewById(R.id.tv_ho_ten);
             btnDelete = itemView.findViewById(R.id.btn_delete);
             btnUpdate = itemView.findViewById(R.id.btn_edit);
         }

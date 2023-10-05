@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.asm_duanmau.database.DbHelper;
 import com.example.asm_duanmau.model.LoaiSach;
-import com.example.asm_duanmau.model.ThanhVien;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,32 +18,16 @@ public class LoaiSachDAO {
         dbHelper = new DbHelper(context);
     }
 
-    public List<LoaiSach> getAllList(){
-        List<LoaiSach> list = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.beginTransaction();
 
-        try {
-            Cursor cursor = db.rawQuery("SELECT * FROM LOAISACH", null);
-
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-
-                do {
-                    list.add(new LoaiSach(cursor.getInt(0),cursor.getString(1)));
-                } while (cursor.moveToNext());
-                db.setTransactionSuccessful();
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            db.endTransaction();
-        }
-
-        return list;
+    public LoaiSach getID(String id){
+        String sql = "SELECT * FROM LOAISACH WHERE maLoai = ?";
+        List<LoaiSach> list = getData(sql, id);
+        return list.get(0);
     }
-
+    public List<LoaiSach> getAll(){
+        String sql = "SELECT * FROM LoaiSach";
+        return getData(sql);
+    }
 
     public boolean update(LoaiSach obj, String id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -75,11 +58,21 @@ public class LoaiSachDAO {
         long check = database.insert("LOAISACH", null, contentValues);
         return check != -1;
     }
-    public boolean delete(int id){
+    public int delete(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        List<LoaiSach> list = getAllList();
 
-        long check = database.delete("LOAISACH", "maLoai=?", new String[]{String.valueOf(list.get(id).getMaLoai())});
-        return check!=-1;
+        return database.delete("LOAISACH", "maLoai= ?", new String[]{String.valueOf(id)});
+    }
+
+    private List<LoaiSach> getData(String sql, String ...selectionArgs){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        List<LoaiSach> list = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql, selectionArgs);
+        while (c.moveToNext()){
+            list.add(new LoaiSach(c.getInt(0),c.getString(1)));
+        }
+
+        return list;
     }
 }

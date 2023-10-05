@@ -3,7 +3,6 @@ package com.example.asm_duanmau.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.asm_duanmau.R;
-import com.example.asm_duanmau.adapter.ThanhVienAdapter;
 import com.example.asm_duanmau.dao.ThuThuDAO;
 import com.example.asm_duanmau.model.ThuThu;
 
@@ -32,7 +30,7 @@ public class TaoThuThu extends Fragment {
 
         EditText edtUsername = view.findViewById(R.id.edt_username);
         EditText edtHoTen = view.findViewById(R.id.edt_ho_ten);
-        Button btnTao = view.findViewById(R.id.btn_tao);
+        Button btnTao = view.findViewById(R.id.btn_them);
 
         btnTao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +49,6 @@ public class TaoThuThu extends Fragment {
                 list = thuThuDao.getListThuThu();
             }
         });
-
 
         return view;
     }

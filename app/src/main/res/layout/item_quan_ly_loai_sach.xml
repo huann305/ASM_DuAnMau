@@ -10,9 +10,15 @@
         android:padding="8dp">
 
         <TextView
+            android:id="@+id/tv_ma_loai_sach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên loại sách: CNTT" />
+        <TextView
             android:id="@+id/tv_ten_loai_sach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ma_loai_sach"
             android:text="Tên loại sách: CNTT" />
 
         <ImageView
@@ -20,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginHorizontal="8dp"
             android:src="@drawable/baseline_delete_24" />
 
@@ -27,6 +34,7 @@
             android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginHorizontal="8dp"
             android:layout_toStartOf="@id/btn_delete"
             android:src="@drawable/baseline_edit_24" />

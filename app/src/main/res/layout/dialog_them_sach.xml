@@ -34,21 +34,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số lượng">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_so_luong"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Tiền thuê">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edt_tien_thue"/>
+            android:id="@+id/tv_tien_thue"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -68,7 +58,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_tao"
+            android:id="@+id/btn_them"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:background="#0396C6"

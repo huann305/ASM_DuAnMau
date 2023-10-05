@@ -19,32 +19,16 @@ public class ThanhVienDAO {
         dbHelper = new DbHelper(context);
     }
 
-    public List<ThanhVien> getAllList(){
-        List<ThanhVien> list = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.beginTransaction();
 
-        try {
-            Cursor cursor = db.rawQuery("SELECT * FROM THANHVIEN", null);
-
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-
-                do {
-                    list.add(new ThanhVien(cursor.getString(0), cursor.getString(1), cursor.getInt(2)));
-                } while (cursor.moveToNext());
-                db.setTransactionSuccessful();
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            db.endTransaction();
-        }
-
-        return list;
+    public ThanhVien getID(String id){
+        String sql = "SELECT * FROM THANHVIEN WHERE maTV = ?";
+        List<ThanhVien> list = getData(sql, id);
+        return list.get(0);
     }
-
+    public List<ThanhVien> getAll(){
+        String sql = "SELECT * FROM THANHVIEN";
+        return getData(sql);
+    }
 
     public boolean update(ThanhVien thanhVien, String id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -77,11 +61,21 @@ public class ThanhVienDAO {
         long check = database.insert("THANHVIEN", null, contentValues);
         return check != -1;
     }
-    public boolean delete(int id){
+    public int delete(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        List<ThanhVien> list = getAllList();
 
-        long check = database.delete("THANHVIEN", "maTV=?", new String[]{String.valueOf(list.get(id).getMaTV())});
-        return check!=-1;
+        return database.delete("THANHVIEN", "maTV= ?", new String[]{String.valueOf(id)});
+    }
+
+    private List<ThanhVien> getData(String sql, String ...selectionArgs){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        List<ThanhVien> list = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql, selectionArgs);
+        while (c.moveToNext()){
+            list.add(new ThanhVien(c.getInt(0),c.getString(1),c.getString(2)));
+        }
+
+        return list;
     }
 }

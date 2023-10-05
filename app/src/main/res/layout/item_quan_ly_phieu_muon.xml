@@ -25,8 +25,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên sách: Lập trình android"
+                android:text="Thủ thư: Heheheehe"
                 android:layout_below="@+id/tv_thanh_vien"
+                android:id="@+id/tv_thu_thu"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sách: Lập trình android"
+                android:layout_below="@+id/tv_thu_thu"
                 android:id="@+id/tv_ten_sach"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Đã trả sách"
+                android:text="Ngày mượn: 30/05/2004"
                 android:layout_below="@id/tv_da_tra_sach"
                 android:id="@+id/tv_ngay_muon"/>
 

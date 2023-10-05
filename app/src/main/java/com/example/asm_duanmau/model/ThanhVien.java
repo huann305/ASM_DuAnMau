@@ -1,15 +1,15 @@
 package com.example.asm_duanmau.model;
 
 public class ThanhVien {
-    private String maTV;
+    private int maTV;
     private String hoTen;
-    private int namSinh;
+    private String namSinh;
 
-    public String getMaTV() {
+    public int getMaTV() {
         return maTV;
     }
 
-    public void setMaTV(String maTV) {
+    public void setMaTV(int maTV) {
         this.maTV = maTV;
     }
 
@@ -21,19 +21,24 @@ public class ThanhVien {
         this.hoTen = hoTen;
     }
 
-    public int getNamSinh() {
+    public String getNamSinh() {
         return namSinh;
     }
 
-    public void setNamSinh(int namSinh) {
+    public void setNamSinh(String namSinh) {
         this.namSinh = namSinh;
     }
 
     public ThanhVien() {
     }
 
-    public ThanhVien(String maTV, String hoTen, int namSinh) {
+    public ThanhVien(int maTV, String hoTen, String namSinh) {
         this.maTV = maTV;
+        this.hoTen = hoTen;
+        this.namSinh = namSinh;
+    }
+
+    public ThanhVien(String hoTen, String namSinh) {
         this.hoTen = hoTen;
         this.namSinh = namSinh;
     }
