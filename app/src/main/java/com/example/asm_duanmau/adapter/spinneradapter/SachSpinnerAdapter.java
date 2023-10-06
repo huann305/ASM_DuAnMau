@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.example.asm_duanmau.R;
 import com.example.asm_duanmau.model.Sach;
 
+import java.util.Date;
 import java.util.List;
 
 public class SachSpinnerAdapter extends ArrayAdapter<Sach> {
@@ -26,7 +27,9 @@ public class SachSpinnerAdapter extends ArrayAdapter<Sach> {
         this.list = objects;
     }
 
-
+    int maTV;
+    int maSach;
+    int tienThue;
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

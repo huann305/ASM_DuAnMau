@@ -59,14 +59,6 @@ public class QuanLySachFragment extends Fragment {
                 Button btnHuy = dialog.findViewById(R.id.btn_huy);
                 Button btnThem = dialog.findViewById(R.id.btn_them);
 
-                btnThem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        dialog.dismiss();
-                    }
-                });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

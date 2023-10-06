@@ -27,6 +27,16 @@ public class PhieuMuonDAO {
         List<PhieuMuon> list = getData(sql, id);
         return list.get(0);
     }
+    public List<PhieuMuon> checkSach(String id) {
+        String sql = "SELECT * FROM PHIEUMUON WHERE maSach = ?";
+        List<PhieuMuon> list = null;
+        try {
+            list = getData(sql, id);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
     public List<PhieuMuon> getAll() throws ParseException {
         String sql = "SELECT * FROM PHIEUMUON";
         return getData(sql);
@@ -38,11 +48,11 @@ public class PhieuMuonDAO {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("maTT", obj.getMaTT());
+//        contentValues.put("maTT", obj.getMaTT());
         contentValues.put("maTV", obj.getMaTV());
         contentValues.put("maSach", obj.getMaSach());
         contentValues.put("tienThue", obj.getTienThue());
-        contentValues.put("ngay", obj.getNgay().getTime());
+//        contentValues.put("ngay", obj.getNgay().getTime());
         contentValues.put("traSach", obj.getTraSach());
 
         database.setTransactionSuccessful();

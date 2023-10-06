@@ -13,31 +13,39 @@ import java.util.List;
 
 public class SachDAO {
     private DbHelper dbHelper;
+    Context context;
 
     public SachDAO(Context context) {
+        this.context = context;
         dbHelper = new DbHelper(context);
     }
 
 
-    public Sach getID(String id){
+    public Sach getID(String id) {
         String sql = "SELECT * FROM SACH WHERE maSach = ?";
         List<Sach> list = getData(sql, id);
         return list.get(0);
     }
-    public List<Sach> getAll(){
+
+    public List<Sach> getAll() {
         String sql = "SELECT * FROM SACH";
         return getData(sql);
     }
 
-    public boolean update(Sach obj, String id){
+    public List<Sach> checkLoaiSach(String id) {
+        String sql = "SELECT * FROM SACH WHERE maLoai = ?";
+        return getData(sql, id);
+    }
+
+    public boolean update(Sach obj, String id) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.beginTransaction();
 
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("tenSach", obj.getTenSach());
-        contentValues.put("giaThue", obj.getMaLoai());
-        contentValues.put("maLoai", obj.getGiaThue());
+        contentValues.put("giaThue", obj.getGiaThue());
+        contentValues.put("maLoai", obj.getMaLoai());
 
         database.setTransactionSuccessful();
         database.endTransaction();
@@ -46,7 +54,7 @@ public class SachDAO {
         return check != -1;
     }
 
-    public boolean add(Sach obj){
+    public boolean add(Sach obj) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.beginTransaction();
 
@@ -62,19 +70,25 @@ public class SachDAO {
         long check = database.insert("Sach", null, contentValues);
         return check != -1;
     }
-    public int delete(int id){
+
+    public int delete(int id) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        return database.delete("SACH", "maSach= ?", new String[]{String.valueOf(id)});
+        PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO(context);
+        if (phieuMuonDAO.checkSach(id + "").size() > 0) {
+            return -1;
+        } else {
+            return database.delete("SACH", "maSach= ?", new String[]{String.valueOf(id)});
+        }
     }
 
-    private List<Sach> getData(String sql, String ...selectionArgs){
+    private List<Sach> getData(String sql, String... selectionArgs) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         List<Sach> list = new ArrayList<>();
 
         Cursor c = db.rawQuery(sql, selectionArgs);
-        while (c.moveToNext()){
-            list.add(new Sach(c.getInt(0),c.getString(1),c.getInt(2), c.getInt(3)));
+        while (c.moveToNext()) {
+            list.add(new Sach(c.getInt(0), c.getString(1), c.getInt(2), c.getInt(3)));
         }
 
         return list;

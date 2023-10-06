@@ -23,7 +23,7 @@ public class ThongKeDAO {
     }
 
     public List<Top> getTop(){
-        String sqlTop = "SELECT maSach count(maSach) as soLuong FROM PHIEUMUON GROUP BY maSach ORDER BY soLuong DESC LIMIT 10";
+        String sqlTop = "SELECT maSach, COUNT (maSach) as soLuong FROM PHIEUMUON GROUP BY maSach ORDER BY soLuong DESC LIMIT 10";
         List<Top> list = new ArrayList<>();
         SachDAO sachDAO = new SachDAO(context);
         Cursor c = db.rawQuery(sqlTop, null);

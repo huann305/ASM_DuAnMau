@@ -13,8 +13,10 @@ import java.util.List;
 
 public class LoaiSachDAO {
     private DbHelper dbHelper;
+    Context context;
 
     public LoaiSachDAO(Context context) {
+        this.context = context;
         dbHelper = new DbHelper(context);
     }
 
@@ -61,7 +63,12 @@ public class LoaiSachDAO {
     public int delete(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        return database.delete("LOAISACH", "maLoai= ?", new String[]{String.valueOf(id)});
+        SachDAO sachDAO = new SachDAO(context);
+        if(!(sachDAO.checkLoaiSach(id + "").size() > 0)){
+            return database.delete("LOAISACH", "maLoai= ?", new String[]{String.valueOf(id)});
+        }else{
+            return -1;
+        }
     }
 
     private List<LoaiSach> getData(String sql, String ...selectionArgs){

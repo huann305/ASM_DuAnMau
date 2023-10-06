@@ -14,6 +14,7 @@
         android:text="Thêm thành viên"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:id="@+id/tv_title"
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -42,11 +43,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <Button
+            android:id="@+id/btn_huy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:background="#C93142"
+            android:layout_marginRight="10dp"
+            android:text="Hủy"
+            android:textColor="@color/white" />
+        <Button
             android:id="@+id/btn_them"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#0396C6"

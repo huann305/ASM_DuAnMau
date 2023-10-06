@@ -36,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "tenSach TEXT NOT NULL, " +
                 "giaThue INTEGER NOT NULL, " +
                 "maLoai INTEGER NOT NULL, " +
-                "FOREIGN KEY (maLoai) REFERENCES LOAISACH(maLoai) ON DELETE RESTRICT) ";
+                "FOREIGN KEY (maLoai) REFERENCES LOAISACH(maLoai)) ";
         db.execSQL(createTableSach);
 
         String createTablePhieuMuon = "CREATE TABLE PHIEUMUON (maPM INTEGER PRIMARY KEY AUTOINCREMENT, " +

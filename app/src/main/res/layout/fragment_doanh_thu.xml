@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.top10.Top10Fragment">
+    tools:context=".ui.top10.Top10Fragment"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_tu_ngay"
+        android:inputType="none"
+        android:focusable="false"
+        android:hint="Từ ngày"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_tu_ngay"
+        android:id="@+id/edt_den_ngay"
+        android:inputType="none"
+        android:focusable="false"
+        android:hint="Đến ngày"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Doanh Thu"
+        android:id="@+id/btn_doanh_thu"
+        android:layout_below="@id/edt_den_ngay"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:height="50dp"
+        android:gravity="center_vertical|end"
+        android:id="@+id/tv_doanh_thu"
+        android:textSize="20sp"
+        android:layout_below="@+id/edt_den_ngay"
+        android:layout_toEndOf="@+id/btn_doanh_thu"/>
 
-</FrameLayout>
+</RelativeLayout>

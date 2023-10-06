@@ -1,16 +1,25 @@
 package com.example.asm_duanmau.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asm_duanmau.R;
+import com.example.asm_duanmau.dao.LoaiSachDAO;
 import com.example.asm_duanmau.dao.ThanhVienDAO;
 import com.example.asm_duanmau.model.ThanhVien;
 
@@ -36,16 +45,77 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     @Override
     public void onBindViewHolder(@NonNull ThanhVienViewHolder holder, int position) {
         ThanhVien thanhVien = list.get(position);
-        holder.tvHoten.setText(thanhVien.getHoTen());
-        holder.tvMaTV.setText(thanhVien.getMaTV() + "");
-        holder.tvNamSinh.setText(thanhVien.getNamSinh());
+        holder.tvHoten.setText("Họ tên: " + thanhVien.getHoTen());
+        holder.tvMaTV.setText("Mã thành viên: " + thanhVien.getMaTV() + "");
+        holder.tvNamSinh.setText("Năm sinh: " + thanhVien.getNamSinh());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThanhVienDAO thanhVienDAO = new ThanhVienDAO(context);
-                thanhVienDAO.delete(list.get(holder.getLayoutPosition()).getMaTV());
-                list.remove(holder.getAdapterPosition());
-                notifyDataSetChanged();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Thông báo");
+
+                builder.setMessage("Bạn có muốn xóa " + list.get(holder.getLayoutPosition()).getHoTen() + "?");
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ThanhVienDAO thanhVienDAO = new ThanhVienDAO(context);
+                        thanhVienDAO.delete(list.get(holder.getLayoutPosition()).getMaTV());
+                        list.remove(holder.getAdapterPosition());
+                        notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
+        holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_them_thanh_vien);
+                Window window = dialog.getWindow();
+
+                TextView tvTitle = dialog.findViewById(R.id.tv_title);
+
+                Button btnHuy = dialog.findViewById(R.id.btn_huy);
+                Button btnSua = dialog.findViewById(R.id.btn_them);
+
+                EditText edtName = dialog.findViewById(R.id.edt_ho_ten);
+                EditText edtAge = dialog.findViewById(R.id.edt_nam_sinh);
+
+                edtName.setText(list.get(holder.getLayoutPosition()).getHoTen() + "");
+                edtAge.setText(list.get(holder.getLayoutPosition()).getNamSinh() + "");
+
+                btnSua.setText("Sửa");
+                tvTitle.setText("Sửa thông tin thành viên");
+
+                btnSua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ThanhVienDAO thanhVienDAO = new ThanhVienDAO(context);
+                        String name = edtName.getText().toString();
+                        String age = edtAge.getText().toString();
+
+                        thanhVienDAO.update(new ThanhVien(0,name, age), list.get(holder.getLayoutPosition()).getMaTV() + "");
+                        list = thanhVienDAO.getAll();
+
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+                btnHuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.show();
+                return false;
             }
         });
     }
@@ -60,7 +130,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
         TextView tvMaTV;
         TextView tvNamSinh;
         ImageView btnDelete;
-        ImageView btnUpdate;
+        CardView layout;
 
         public ThanhVienViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,7 +138,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             tvMaTV = itemView.findViewById(R.id.tv_ma_thanh_vien);
             tvNamSinh = itemView.findViewById(R.id.tv_ho_ten);
             btnDelete = itemView.findViewById(R.id.btn_delete);
-            btnUpdate = itemView.findViewById(R.id.btn_edit);
+            layout = itemView.findViewById(R.id.layout);
         }
     }
 }
