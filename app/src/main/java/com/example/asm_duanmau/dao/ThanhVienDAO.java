@@ -14,8 +14,10 @@ import java.util.List;
 
 public class ThanhVienDAO {
     private DbHelper dbHelper;
+    Context context;
 
     public ThanhVienDAO(Context context) {
+        this.context = context;
         dbHelper = new DbHelper(context);
     }
 
@@ -64,7 +66,12 @@ public class ThanhVienDAO {
     public int delete(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        return database.delete("THANHVIEN", "maTV= ?", new String[]{String.valueOf(id)});
+        PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO(context);
+        if(phieuMuonDAO.checkThanhVien(id + "").size()>0){
+            return -1;
+        }else{
+            return database.delete("THANHVIEN", "maTV= ?", new String[]{String.valueOf(id)});
+        }
     }
 
     private List<ThanhVien> getData(String sql, String ...selectionArgs){

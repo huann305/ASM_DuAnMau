@@ -47,6 +47,11 @@ public class DoanhThuFragment extends Fragment{
                 String tuNgay = binding.edtTuNgay.getText().toString();
                 String denNgay = binding.edtDenNgay.getText().toString();
 
+                if(thongKeDAO.getDoanhThu(tuNgay, denNgay) == -1){
+                    binding.tvDoanhThu.setText(0 + "VNĐ");
+                    return;
+                }
+
                 binding.tvDoanhThu.setText(thongKeDAO.getDoanhThu(tuNgay, denNgay) + "VNĐ");
             }
         });

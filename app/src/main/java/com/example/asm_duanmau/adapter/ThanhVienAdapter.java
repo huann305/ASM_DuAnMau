@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -59,7 +60,10 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ThanhVienDAO thanhVienDAO = new ThanhVienDAO(context);
-                        thanhVienDAO.delete(list.get(holder.getLayoutPosition()).getMaTV());
+                        if(thanhVienDAO.delete(list.get(holder.getLayoutPosition()).getMaTV()) == -1){
+                            Toast.makeText(context, "Không thể xóa", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         list.remove(holder.getAdapterPosition());
                         notifyDataSetChanged();
                     }

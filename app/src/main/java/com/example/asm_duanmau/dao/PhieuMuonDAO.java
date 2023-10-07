@@ -37,6 +37,16 @@ public class PhieuMuonDAO {
         }
         return list;
     }
+    public List<PhieuMuon> checkThanhVien(String id) {
+        String sql = "SELECT * FROM PHIEUMUON WHERE maTV = ?";
+        List<PhieuMuon> list = null;
+        try {
+            list = getData(sql, id);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
     public List<PhieuMuon> getAll() throws ParseException {
         String sql = "SELECT * FROM PHIEUMUON";
         return getData(sql);

@@ -38,7 +38,11 @@ public class ThongKeDAO {
         List<Integer> list = new ArrayList<>();
         Cursor c = db.rawQuery(sql, new String[]{tuNgay, denNgay});
         while (c.moveToNext()){
-            list.add(Integer.parseInt(c.getString(c.getColumnIndex("doanhThu"))));
+            try {
+                list.add(Integer.parseInt(c.getString(c.getColumnIndex("doanhThu"))));
+            }catch (Exception e){
+                return -1;
+            }
         }
         return list.get(0);
     }
