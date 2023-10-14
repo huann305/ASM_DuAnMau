@@ -34,7 +34,13 @@
                 android:layout_height="wrap_content"
                 android:text="Tiền thuê: 10000"
                 android:layout_below="@+id/tv_ten_loai_sach"
-                android:id="@+id/tv_tien_thue"/>
+                android:id="@+id/edt_tien_thue"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiền thuê: 10000"
+                android:layout_below="@+id/edt_tien_thue"
+                android:id="@+id/tv_nam_xuat_ban"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"

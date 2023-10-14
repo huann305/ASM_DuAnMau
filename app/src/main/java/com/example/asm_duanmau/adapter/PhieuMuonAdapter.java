@@ -36,7 +36,6 @@ import com.example.asm_duanmau.model.ThuThu;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.PhieuMuonViewHolder> {
@@ -125,7 +124,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                 TextView tvNgayMuon = dialog.findViewById(R.id.tv_ngay_muon);
                 Spinner spnThanhVien = dialog.findViewById(R.id.spn_thanh_vien);
                 Spinner spnSach = dialog.findViewById(R.id.spn_ten_sach);
-                TextView tvTienThue = dialog.findViewById(R.id.tv_tien_thue);
+                TextView tvTienThue = dialog.findViewById(R.id.edt_tien_thue);
                 CheckBox checkBox = dialog.findViewById(R.id.cbDaTraSach);
 
                 checkBox.setVisibility(View.VISIBLE);
@@ -243,7 +242,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
             tvThanhVien = itemView.findViewById(R.id.tv_thanh_vien);
             tvThuThu = itemView.findViewById(R.id.tv_thu_thu);
             tvTenSach = itemView.findViewById(R.id.tv_ten_sach);
-            tvTienThue = itemView.findViewById(R.id.tv_tien_thue);
+            tvTienThue = itemView.findViewById(R.id.edt_tien_thue);
             tvDaTraSach = itemView.findViewById(R.id.tv_da_tra_sach);
             tvvNgayMuon = itemView.findViewById(R.id.tv_ngay_muon);
             btnDelete = itemView.findViewById(R.id.btn_delete);

@@ -56,7 +56,8 @@ public class QuanLySachFragment extends Fragment {
 
                 Spinner spinner = dialog.findViewById(R.id.spn_loai_sach);
                 EditText edtTenSach = dialog.findViewById(R.id.edt_ten_sach);
-                EditText edtTienThue = dialog.findViewById(R.id.tv_tien_thue);
+                EditText edtTienThue = dialog.findViewById(R.id.edt_tien_thue);
+                EditText edtNamXuatBan = dialog.findViewById(R.id.edt_nam_xuat_ban);
                 Button btnHuy = dialog.findViewById(R.id.btn_huy);
                 Button btnThem = dialog.findViewById(R.id.btn_them);
 
@@ -82,13 +83,15 @@ public class QuanLySachFragment extends Fragment {
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String namXuatBan;
                         tenSach = edtTenSach.getText().toString();
                         giaThue = edtTienThue.getText().toString();
-                        if(!adapter.validate(tenSach, giaThue)){
+                        namXuatBan = edtNamXuatBan.getText().toString();
+                        if(!adapter.validate(tenSach, giaThue, namXuatBan)){
                             Toast.makeText(getContext(), "Vui lòng kiểm tra dữ liệu", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        sachDAO.add(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai));
+                        sachDAO.add(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai, Integer.parseInt(namXuatBan)));
 
                         list = sachDAO.getAll();
                         adapter = new SachAdapter(list, getContext());

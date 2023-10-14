@@ -36,6 +36,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
     Context context;
     private String tenSach;
     private String giaThue;
+    private String namXuatBan;
     private int maLoai;
 
     public SachAdapter(List<Sach> list, Context context) {
@@ -59,6 +60,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         holder.tvTenSach.setText("Tên sách: " + sach.getTenSach());
         holder.tvLoaiSach.setText("Loại: " + loaiSach);
         holder.tvGiaSach.setText("Giá thuê: " + sach.getGiaThue() + "");
+        holder.tvNamXuatBan.setText("Năm xuất bản: " + sach.getNamXuatBan());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,10 +103,12 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
                 Button btnSua = dialog.findViewById(R.id.btn_them);
                 Spinner spinner = dialog.findViewById(R.id.spn_loai_sach);
                 EditText edtTenSach = dialog.findViewById(R.id.edt_ten_sach);
-                EditText edtTienThue = dialog.findViewById(R.id.tv_tien_thue);
+                EditText edtTienThue = dialog.findViewById(R.id.edt_tien_thue);
+                EditText edtNamXuatBan = dialog.findViewById(R.id.edt_nam_xuat_ban);
 
                 edtTienThue.setText(list.get(holder.getLayoutPosition()).getGiaThue() + "");
                 edtTenSach.setText(list.get(holder.getLayoutPosition()).getTenSach() + "");
+                edtNamXuatBan.setText(list.get(holder.getLayoutPosition()).getNamXuatBan() + "");
 
                 List<LoaiSach> loaiSachList = loaiSachDAO.getAll();
 
@@ -135,13 +139,14 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
 
                         tenSach = edtTenSach.getText().toString();
                         giaThue = edtTienThue.getText().toString();
+                        namXuatBan = edtNamXuatBan.getText().toString();
 
-                        if(!validate(tenSach, giaThue)){
+                        if(!validate(tenSach, giaThue, namXuatBan)){
                             Toast.makeText(context, "Vui lòng kiểm tra dữ liệu", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        sachDAO.update(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai), list.get(holder.getLayoutPosition()).getMaSach() + "");
+                        sachDAO.update(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai, Integer.parseInt(namXuatBan)), list.get(holder.getLayoutPosition()).getMaSach() + "");
 
                         Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                         list = sachDAO.getAll();
@@ -162,11 +167,14 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         });
     }
 
-    public boolean validate(String tenSach, String gia) {
+    public boolean validate(String tenSach, String gia, String namXuatBan) {
         if (tenSach.trim().equals("") || gia.trim().equals("")) {
             return false;
         }
         if(!gia.matches("[0-9]+")){
+            return false;
+        }
+        if(!namXuatBan.matches("[0-9]+")){
             return false;
         }
         return true;
@@ -182,6 +190,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         TextView tvTenSach;
         TextView tvLoaiSach;
         TextView tvGiaSach;
+        TextView tvNamXuatBan;
         ImageView btnDelete;
         CardView layout;
 
@@ -191,7 +200,8 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
             tvMaSach = itemView.findViewById(R.id.tv_ma_sach);
             tvTenSach = itemView.findViewById(R.id.tv_ten_sach);
             tvLoaiSach = itemView.findViewById(R.id.tv_ten_loai_sach);
-            tvGiaSach = itemView.findViewById(R.id.tv_tien_thue);
+            tvGiaSach = itemView.findViewById(R.id.edt_tien_thue);
+            tvNamXuatBan = itemView.findViewById(R.id.tv_nam_xuat_ban);
             btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }

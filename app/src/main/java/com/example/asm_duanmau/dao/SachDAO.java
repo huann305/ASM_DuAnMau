@@ -46,6 +46,7 @@ public class SachDAO {
         contentValues.put("tenSach", obj.getTenSach());
         contentValues.put("giaThue", obj.getGiaThue());
         contentValues.put("maLoai", obj.getMaLoai());
+        contentValues.put("namXuatBan", obj.getNamXuatBan());
 
         database.setTransactionSuccessful();
         database.endTransaction();
@@ -63,6 +64,7 @@ public class SachDAO {
         contentValues.put("tenSach", obj.getTenSach());
         contentValues.put("giaThue", obj.getGiaThue());
         contentValues.put("maLoai", obj.getMaLoai());
+        contentValues.put("namXuatBan", obj.getNamXuatBan());
 
         database.setTransactionSuccessful();
         database.endTransaction();
@@ -88,7 +90,7 @@ public class SachDAO {
 
         Cursor c = db.rawQuery(sql, selectionArgs);
         while (c.moveToNext()) {
-            list.add(new Sach(c.getInt(0), c.getString(1), c.getInt(2), c.getInt(3)));
+            list.add(new Sach(c.getInt(0), c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4)));
         }
 
         return list;

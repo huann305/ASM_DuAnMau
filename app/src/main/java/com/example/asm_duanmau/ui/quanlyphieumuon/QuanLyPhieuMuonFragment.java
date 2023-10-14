@@ -71,7 +71,7 @@ public class QuanLyPhieuMuonFragment extends Fragment {
                 TextView tvNgayMuon = dialog.findViewById(R.id.tv_ngay_muon);
                 Spinner spnThanhVien = dialog.findViewById(R.id.spn_thanh_vien);
                 Spinner spnSach = dialog.findViewById(R.id.spn_ten_sach);
-                TextView tvTienThue = dialog.findViewById(R.id.tv_tien_thue);
+                TextView tvTienThue = dialog.findViewById(R.id.edt_tien_thue);
                 Button btnHuy = dialog.findViewById(R.id.btn_huy);
                 Button btnTao = dialog.findViewById(R.id.btn_them);
 

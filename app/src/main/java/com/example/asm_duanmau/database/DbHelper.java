@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "PNLIB.db";
     public DbHelper(@Nullable Context context) {
-        super(context, DBNAME, null, 2);
+        super(context, DBNAME, null, 3);
     }
 
     @Override
@@ -36,6 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "tenSach TEXT NOT NULL, " +
                 "giaThue INTEGER NOT NULL, " +
                 "maLoai INTEGER NOT NULL, " +
+                "namXuatBan INTEGER NOT NULL," +
                 "FOREIGN KEY (maLoai) REFERENCES LOAISACH(maLoai)) ";
         db.execSQL(createTableSach);
 
@@ -49,14 +50,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createTablePhieuMuon);
 
         //data mẫu
-        db.execSQL("INSERT INTO LoaiSach VALUES (1, 'Thiếu nhi'),(2,'Tình cảm'),(3, 'Giáo khoa')");
-        db.execSQL("INSERT INTO Sach VALUES (1, 'Hãy đợi đấy', 2500, 1), (2, 'Thằng cuội', 1000, 1), (3, 'Lập trình Android', 2000, 3)");
-        db.execSQL("INSERT INTO ThuThu VALUES ('thuthu01','Nguyễn Văn Anh','1234','admin'),('thuthu02','Trần Văn Hùng','123abc','ThuThu')");
-        db.execSQL("INSERT INTO ThanhVien VALUES (1,'Cao Thu Trang','2000'),(2,'Trần Mỹ Kim','2000')");
+//        db.execSQL("INSERT INTO LoaiSach VALUES (1, 'Thiếu nhi'),(2,'Tình cảm'),(3, 'Giáo khoa')");
+//        db.execSQL("INSERT INTO Sach VALUES (1, 'Hãy đợi đấy', 2500, 1), (2, 'Thằng cuội', 1000, 1), (3, 'Lập trình Android', 2000, 3)");
+//        db.execSQL("INSERT INTO ThuThu VALUES ('thuthu01','Nguyễn Văn Anh','1234','admin'),('thuthu02','Trần Văn Hùng','123abc','ThuThu')");
+//        db.execSQL("INSERT INTO ThanhVien VALUES (1,'Cao Thu Trang','2000'),(2,'Trần Mỹ Kim','2000')");
         //trả sách: 1: đã trả - 0: chưa trả
-        db.execSQL("INSERT INTO PhieuMuon VALUES (1,'thuthu01',1, 1, 2500, 1, '2004/05/30')," +
-                "(2,'thuthu01',1, 3, 2000, 0, '2004/05/30')," +
-                "(3,'thuthu02',2, 1, 2000, 1, '2004/05/30')");
+//        db.execSQL("INSERT INTO PhieuMuon VALUES (1,'thuthu01',1, 1, 2500, 1, '2004/05/30')," +
+//                "(2,'thuthu01',1, 3, 2000, 0, '2004/05/30')," +
+//                "(3,'thuthu02',2, 1, 2000, 1, '2004/05/30')");
     }
 
     @Override
