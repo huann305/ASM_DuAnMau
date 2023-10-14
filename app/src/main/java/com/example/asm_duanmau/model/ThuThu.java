@@ -58,10 +58,9 @@ public class ThuThu {
                 '}';
     }
 
-    public ThuThu(String maTT, String hoTen) {
+    public ThuThu(String maTT, String hoTen, String matKhau) {
         this.maTT = maTT;
         this.hoTen = hoTen;
         this.matKhau = matKhau;
-        this.role = role;
     }
 }

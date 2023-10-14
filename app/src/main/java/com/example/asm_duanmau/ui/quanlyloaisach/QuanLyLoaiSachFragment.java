@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -62,6 +63,10 @@ public class QuanLyLoaiSachFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         String name = edtName.getText().toString();
+                        if(!adapter.validate(name)){
+                            Toast.makeText(getContext(), "Tên sách không hợp lệ", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         LoaiSach loaiSach = new LoaiSach();
                         loaiSach.setTenLoai(name);
                         loaiSachDAO.add(loaiSach);

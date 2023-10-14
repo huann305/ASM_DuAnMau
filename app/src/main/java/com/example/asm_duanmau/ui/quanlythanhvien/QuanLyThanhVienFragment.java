@@ -53,6 +53,11 @@ public class QuanLyThanhVienFragment extends Fragment {
                         String name = edtName.getText().toString();
                         String age = edtAge.getText().toString();
 
+                        if(!thanhVienAdapter.validate(name, age)){
+                            Toast.makeText(getContext(), "Vui lòng kiểm tra thông tin và nhập lại", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         thanhVienDAO.add(new ThanhVien(0,name, age));
                         list = thanhVienDAO.getAll();
 

@@ -35,7 +35,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
     List<Sach> list;
     Context context;
     private String tenSach;
-    private int giaThue;
+    private String giaThue;
     private int maLoai;
 
     public SachAdapter(List<Sach> list, Context context) {
@@ -132,10 +132,16 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
                     @Override
                     public void onClick(View v) {
                         SachDAO sachDAO = new SachDAO(context);
-                        tenSach = edtTenSach.getText().toString();
-                        giaThue = Integer.parseInt(edtTienThue.getText().toString());
 
-                        sachDAO.update(new Sach(0, tenSach, giaThue, maLoai), list.get(holder.getLayoutPosition()).getMaSach() + "");
+                        tenSach = edtTenSach.getText().toString();
+                        giaThue = edtTienThue.getText().toString();
+
+                        if(!validate(tenSach, giaThue)){
+                            Toast.makeText(context, "Vui lòng kiểm tra dữ liệu", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        sachDAO.update(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai), list.get(holder.getLayoutPosition()).getMaSach() + "");
 
                         Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                         list = sachDAO.getAll();
@@ -156,6 +162,16 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         });
     }
 
+    public boolean validate(String tenSach, String gia) {
+        if (tenSach.trim().equals("") || gia.trim().equals("")) {
+            return false;
+        }
+        if(!gia.matches("[0-9]+")){
+            return false;
+        }
+        return true;
+
+    }
     @Override
     public int getItemCount() {
         return list.size();

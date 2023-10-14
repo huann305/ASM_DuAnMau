@@ -29,20 +29,27 @@ public class TaoThuThu extends Fragment {
         list = thuThuDao.getListThuThu();
 
         EditText edtUsername = view.findViewById(R.id.edt_username);
-        EditText edtHoTen = view.findViewById(R.id.edt_ho_ten);
+        EditText edtHoTen = view.findViewById(R.id.edt_ho_ten);;
+        EditText edtMatKhau = view.findViewById(R.id.edt_mat_khau);
         Button btnTao = view.findViewById(R.id.btn_them);
+
 
         btnTao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ThuThuDAO thuThuDao = new ThuThuDAO(getContext());
-                if(!thuThuDao.addThuThu(new ThuThu(edtUsername.getText().toString(), edtHoTen.getText().toString()))){
+                if(!validate(edtUsername.getText().toString().trim(), edtHoTen.getText().toString().trim(), edtMatKhau.getText().toString().trim())){
+                    Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!thuThuDao.addThuThu(new ThuThu(edtUsername.getText().toString(), edtHoTen.getText().toString(), edtMatKhau.getText().toString()))){
                     Toast.makeText(getContext(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
                     Toast.makeText(getContext(), "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
                     edtHoTen.setText("");
                     edtUsername.setText("");
+                    edtMatKhau.setText("");
                     edtUsername.setFocusable(false);
                     edtHoTen.setFocusable(false);
                 }
@@ -51,5 +58,11 @@ public class TaoThuThu extends Fragment {
         });
 
         return view;
+    }
+    private boolean validate(String name, String username, String pass){
+        if(name.equals("") || username.equals("") || pass.equals("")){
+            return false;
+        }
+        return true;
     }
 }

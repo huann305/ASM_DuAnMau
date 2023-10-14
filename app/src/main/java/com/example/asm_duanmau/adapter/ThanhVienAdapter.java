@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,6 +105,12 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
                         String name = edtName.getText().toString();
                         String age = edtAge.getText().toString();
 
+                        if(!validate(name, age)){
+                            Toast.makeText(context, "Vui lòng nhập đúng thông tin", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Log.e("huh", validate(name, age) + "");
+
                         thanhVienDAO.update(new ThanhVien(0,name, age), list.get(holder.getLayoutPosition()).getMaTV() + "");
                         list = thanhVienDAO.getAll();
 
@@ -129,6 +136,16 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
         return list.size();
     }
 
+    public boolean validate(String tenSach, String namSinh) {
+        if (tenSach.trim().equals("") || namSinh.trim().equals("")) {
+            return false;
+        }
+        if(!namSinh.matches("[0-9]+")){
+            return false;
+        }
+        return true;
+
+    }
     public class ThanhVienViewHolder extends RecyclerView.ViewHolder{
         TextView tvHoten;
         TextView tvMaTV;

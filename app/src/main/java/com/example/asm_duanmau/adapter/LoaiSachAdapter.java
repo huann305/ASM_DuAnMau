@@ -98,8 +98,8 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
 
                         String tenSach = edtTenLoai.getText().toString();
 
-                        if(tenSach.trim().equals("")){
-                            Toast.makeText(context, "Không được để trống", Toast.LENGTH_SHORT).show();
+                        if(!validate(tenSach)){
+                            Toast.makeText(context, "Tên sách không hợp lệ", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -130,6 +130,14 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public boolean validate(String tenLoai){
+        if(tenLoai.trim().equals("")){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public class LoaiSachViewHolder extends RecyclerView.ViewHolder{

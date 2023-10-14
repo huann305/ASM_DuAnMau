@@ -75,7 +75,7 @@ public class ThuThuDAO {
 
         contentValues.put("maTT", thu.getMaTT());
         contentValues.put("hoTen", thu.getHoTen());
-        contentValues.put("matKhau", "huann305");
+        contentValues.put("matKhau", thu.getMatKhau());
         contentValues.put("role", "thuthu");
 
         database.setTransactionSuccessful();

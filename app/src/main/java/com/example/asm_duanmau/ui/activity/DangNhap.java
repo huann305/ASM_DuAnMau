@@ -45,6 +45,8 @@ public class DangNhap extends AppCompatActivity {
 
                 if(thuThuDao.checkLogin(username, pass)){
                     login(username, pass);
+                }else{
+                    Toast.makeText(DangNhap.this, "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                 }
             }
         });

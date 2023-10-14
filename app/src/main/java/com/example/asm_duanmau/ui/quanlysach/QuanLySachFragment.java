@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,7 +37,7 @@ public class QuanLySachFragment extends Fragment {
     LoaiSachDAO loaiSachDAO;
     SachAdapter adapter;
     private String tenSach;
-    private int giaThue;
+    private String giaThue;
     private int maLoai;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -82,9 +83,12 @@ public class QuanLySachFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         tenSach = edtTenSach.getText().toString();
-                        giaThue = Integer.parseInt(edtTienThue.getText().toString());
-
-                        sachDAO.add(new Sach(0, tenSach, giaThue, maLoai));
+                        giaThue = edtTienThue.getText().toString();
+                        if(!adapter.validate(tenSach, giaThue)){
+                            Toast.makeText(getContext(), "Vui lòng kiểm tra dữ liệu", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        sachDAO.add(new Sach(0, tenSach, Integer.parseInt(giaThue), maLoai));
 
                         list = sachDAO.getAll();
                         adapter = new SachAdapter(list, getContext());
