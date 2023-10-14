@@ -2,6 +2,9 @@ package com.example.asm_duanmau.ui.quanlysach;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +29,14 @@ import com.example.asm_duanmau.databinding.FragmentQuanLySachBinding;
 import com.example.asm_duanmau.model.LoaiSach;
 import com.example.asm_duanmau.model.Sach;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class QuanLySachFragment extends Fragment {
 
     private FragmentQuanLySachBinding binding;
     List<Sach> list;
+    List<Sach> listSearch;
     List<LoaiSach> listLS;
     SachDAO sachDAO;
     LoaiSachDAO loaiSachDAO;
@@ -47,7 +52,70 @@ public class QuanLySachFragment extends Fragment {
         sachDAO = new SachDAO(getContext());
         loaiSachDAO = new LoaiSachDAO(getContext());
         list = sachDAO.getAll();
+        listSearch = sachDAO.getAll();
         listLS = loaiSachDAO.getAll();
+
+        binding.btnTang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.sort(new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach o1, Sach o2) {
+                        return o1.getGiaThue()<o2.getGiaThue() ? -1 : 1;
+                    }
+                });
+
+                binding.rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter = new SachAdapter(list, getContext());
+                binding.rcv.setAdapter(adapter);
+            }
+        });
+        binding.btnGiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.sort(new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach o1, Sach o2) {
+                        return o1.getGiaThue()>o2.getGiaThue() ? -1 : 1;
+                    }
+                });
+
+                binding.rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter = new SachAdapter(list, getContext());
+                binding.rcv.setAdapter(adapter);
+            }
+        });
+
+
+        binding.search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                list = sachDAO.getAll();
+                listSearch = sachDAO.getAll();
+
+                list.clear();
+                for(Sach sach:listSearch){
+                    if(sach.getTenSach().contains(s)){
+                        list.add(sach);
+
+                    }
+                }
+                binding.rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter = new SachAdapter(list, getContext());
+                binding.rcv.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         binding.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
